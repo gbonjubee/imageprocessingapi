@@ -14,7 +14,7 @@
       "prefer-const": "error"
     },
     "parserOptions": {
-      "sourceType": "module"
+      "ecmaVersion": 8
     },
     "env": {
       "node": true,
