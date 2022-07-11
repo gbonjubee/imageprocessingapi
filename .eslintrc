@@ -14,7 +14,7 @@
       "prefer-const": "error"
     },
     "parserOptions": {
-      "ecmaVersion": 8
+      "ecmaVersion": 2017
     },
     "env": {
       "node": true,
