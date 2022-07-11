@@ -9,16 +9,37 @@ This project provides API for image resizing. The API implements caching so that
 
 
 ### Testing
-The API uses `supertest` for endpoint testing and jasmine for unit testing. To run the test simple run the command below;
+The API uses `supertest` for endpoint testing and jasmine for unit testing. To run the test simple run the command below.
 
-```
-npm run test
+Run `npm run test`
 
-```
+### Building the app
 
-### Running the api
+Run `npm run build`
+
+### Starting the api
 
 Run `npm run start`
+
+- Application will be running at http://localhost:3000/
+
+### Test Image Processing API
+
+- Run without imagetype parameter to default to `.jpg` 
+ http://localhost:3000/api/images?filename=encenadaport&width=300&height=60 
+ 
+ or with imagetype/extension 
+ 
+ http://localhost:3000/api/images?filename=encenadaport&width=300&height=60&imagetype=jpg
+
+- Test without any parameter to see error message and error 400 -  http://localhost:3000/api/images
+
+- Test with invalid image to see error message displayed and error 404 -  http://localhost:3000/api/images?filename=invalid&width=300&height=60&imagetype=jpg
+
+- Test with invalid width to see error message displayed and error 400 -  http://localhost:3000/api/images?filename=invalid&width=0&height=100&imagetype=jpg
+
+- Test with invalid height to see error message displayed and error 400-  http://localhost:3000/api/images?filename=invalid&width=-5&height=0&imagetype=jpg
+
  
 
 ### NOTE:
