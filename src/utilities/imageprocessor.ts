@@ -4,11 +4,23 @@ import fs from 'fs';
 
 const assetpath = './assets/';
 
+const resize = async (
+  filename: string,
+  width: number,
+  height: number,
+  outdir: string
+): Promise<string> => {
+  await sharp(filename)
+    .metadata()
+    .then(() => sharp(filename).resize(width, height).toFile(outdir));
+  return outdir;
+};
+
 const processImage = async (req: express.Request, res: express.Response) => {
   if (!req.query.filename || !req.query.width || !req.query.height) {
     res
       .status(400)
-      .send(`filename, width and height are all required query paramenters`);
+      .send('filename, width and height are all required query paramenters');
     return;
   }
 
@@ -39,24 +51,12 @@ const processImage = async (req: express.Request, res: express.Response) => {
 
   //Return bad request if the width and height are invalid
   if (width <= 0 || height <= 0) {
-    res.status(400).send(`width and height must be greater than zero(0)`);
+    res.status(400).send('width and height must be greater than zero(0)');
     return;
   }
 
   const resizedImage = await resize(inputdir, width, height, outputdir);
   res.sendFile(resizedImage, { root: './' });
-};
-
-const resize = async (
-  filename: string,
-  width: number,
-  height: number,
-  outdir: string
-): Promise<string> => {
-  await sharp(filename)
-    .metadata()
-    .then(() => sharp(filename).resize(width, height).toFile(outdir));
-  return outdir;
 };
 
 export default { resize, processImage };
