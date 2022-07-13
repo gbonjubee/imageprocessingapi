@@ -3,7 +3,7 @@ import imageprocessor from './../../utilities/imageprocessor';
 
 const image = express.Router();
 
-image.get('/', async (req, res) => {
+image.get('/', (req: express.Request, res: express.Response): void => {
   imageprocessor.processImage(req, res);
 });
 
