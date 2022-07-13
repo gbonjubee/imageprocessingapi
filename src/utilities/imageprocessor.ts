@@ -24,6 +24,11 @@ const processImage = async (req: express.Request, res: express.Response) => {
     return;
   }
 
+  if (isNaN(+req.query.width) || isNaN(+req.query.height)) {
+    res.status(400).send('width and height paramenters must be numbers');
+    return;
+  }
+
   const filename = req.query.filename;
   const width = Number(req.query.width);
   const height = Number(req.query.height);
